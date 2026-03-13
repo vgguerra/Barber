@@ -54,3 +54,10 @@ cd backend
 ## Status
 
 Projeto em fase inicial de estruturação.
+
+- [x]  Setup do banco
+- [x]  Seeding do banco (inserir dados)
+- []  Introdução ao Next.js
+- []  Tailwind e Shadcn
+- []  Git hooks
+
