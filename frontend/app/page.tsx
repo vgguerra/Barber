@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "./_components/ui/button";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Hello, World (In next)</h1>
-    </div>
+    <Button>
+      Import
+    </Button>
   );
 }
 
