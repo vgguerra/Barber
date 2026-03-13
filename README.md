@@ -61,3 +61,22 @@ Projeto em fase inicial de estruturação.
 - [x]  Tailwind e Shadcn
 - [x]  Git hooks
 
+## Padrão de commits
+
+Os hooks de Git ficam na raiz do projeto e são executados automaticamente.
+
+- `pre-commit`: roda `lint-staged` no frontend
+- `commit-msg`: valida o padrão Conventional Commits
+
+Formato esperado da mensagem:
+
+```text
+tipo(escopo): descricao
+```
+
+Exemplo:
+
+```text
+feat(backend): add appointment validation
+```
+
