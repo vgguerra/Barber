@@ -1,9 +1,11 @@
 package com.barber.backend.barberShop;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,7 +25,9 @@ public class BarberShopEntity {
 
     private String address;
 
-    private String[] phones;
+    @ElementCollection
+    @Column(name = "phone")
+    private List<String> phones;
 
     private String description;
 
@@ -56,8 +60,8 @@ public class BarberShopEntity {
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
-    public String[] getPhones() { return phones; }
-    public void setPhones(String[] phones) { this.phones = phones; }
+    public List<String> getPhones() { return phones; }
+    public void setPhones(List<String> phones) { this.phones = phones; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
