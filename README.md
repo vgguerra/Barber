@@ -59,5 +59,5 @@ Projeto em fase inicial de estruturação.
 - [x]  Seeding do banco (inserir dados)
 - [x]  Introdução ao Next.js
 - [x]  Tailwind e Shadcn
-- []  Git hooks
+- [x]  Git hooks
 
