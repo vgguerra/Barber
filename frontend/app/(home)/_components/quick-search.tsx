@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Button } from "../../_components/ui/button"
+import { Button } from "@/app/_components/ui/button"
 import { QuickSearchOption } from "@/types/quickSearch"
 
 interface QuickSearchProps {

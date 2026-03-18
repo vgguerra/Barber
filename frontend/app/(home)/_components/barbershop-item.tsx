@@ -1,7 +1,7 @@
-import { Card, CardContent } from "../../_components/ui/card"
+import { Card, CardContent } from "@/app/_components/ui/card"
 import { BarberShop } from "@/types/barbershop"
-import { Button } from "../../_components/ui/button"
-import { Badge } from "../../_components/ui/badge"
+import { Button } from "@/app/_components/ui/button"
+import { Badge } from "@/app/_components/ui/badge"
 import Image from "next/image"
 import { StarIcon } from "lucide-react"
 
