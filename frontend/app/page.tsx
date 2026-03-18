@@ -21,6 +21,19 @@ const Home = async () => {
     .then((res) => res.json())
     .catch(() => [])
 
+
+    // TODO: Adicionar lógica de barbearias mais populares no DB
+    const popularBarbers: BarberShop[] = await fetch(
+    "http://localhost:8080/barber-shops",
+    {
+      cache: "no-store",
+    },    
+  )
+    .then((res) => res.json())
+    .catch(() => [])
+
+    popularBarbers.sort((a, b) => a.name.localeCompare(b.name))
+
   return (
     <div>
       <Header></Header>
@@ -43,27 +56,6 @@ const Home = async () => {
             className="rounded-xl object-cover"
           ></Image>
         </div>
-        {/* <h2 className="mb-3 text-xs font-bold text-gray-400 uppercase">
-          Barbearias
-        </h2>
-
-        <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-          {barberShops.length === 0 ? (
-            <p className="text-sm text-gray-500">
-              Nenhuma barbearia encontrada.
-            </p>
-          ) : (
-            barberShops.map((shop: any) => (
-              <Card key={shop.id}>
-                <CardContent className="px-4 py-4">
-                  <h3 className="text-lg font-semibold">{shop.name}</h3>
-                  <p className="text-sm text-gray-500">{shop.address}</p>
-                  <p className="mt-1 text-sm">{shop.description}</p>
-                </CardContent>
-              </Card>
-            ))
-          )}
-        </div> */}
 
         {/* Agendamento */}
         <h2 className="mb-3 text-xs font-bold text-gray-400 uppercase">
@@ -99,11 +91,30 @@ const Home = async () => {
         </h2>
 
         <div className="hide-scrollbar flex gap-4 overflow-x-auto py-2">
-          {barberShops.map((barbershop: any) => (
+          {barberShops.map((barbershop: BarberShop) => (
+            <BarberShopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
+
+        {/* Populares */}
+        <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
+          Populares
+        </h2>
+
+        <div className="hide-scrollbar flex gap-4 overflow-x-auto py-2">
+          {popularBarbers.map((barbershop: BarberShop) => (
             <BarberShopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
       </div>
+
+      <footer>
+        <Card>
+          <CardContent className='py-2 px-3'>
+            © 2023 Copyright <span className='font-bold'>FSW Barber</span>
+          </CardContent>
+        </Card>
+      </footer>
     </div>
   )
 }
