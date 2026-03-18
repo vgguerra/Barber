@@ -48,11 +48,10 @@ const Home = () => {
             </div>
 
             {/* Direita */}  
-
             <div className="flex flex-col items-center justify-center px-5 border-l-2 border-solid border-gray-300 h-100%">
 
               <p className='text-sm'>Agosto</p>
-              <p className='text-2xk'>05</p>
+              <p className='text-2xl'>05</p>
               <p className='text-sm'>20:00</p>
 
             </div>
