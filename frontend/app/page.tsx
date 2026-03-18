@@ -1,15 +1,21 @@
 import { SearchIcon } from "lucide-react"
-import Header from "./_components/header"
+
+
+import Image from "next/image"
+
+// UI Components
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
 import { Card, CardContent } from "./_components/ui/card"
-import { Badge } from "./_components/ui/badge"
-import { Avatar, AvatarImage } from "./_components/ui/avatar"
-import Image from "next/image"
+
+// Components
+import BookingItem from "@/app/_components/booking-item"
 import BarberShopItem from "@/app/_components/barbershor-item"
+import Header from "./_components/header"
 
 // Types
 import { BarberShop } from "@/types/barbershop"
+import { quickSearchoption } from "./_constants/quickSearch"
 
 const Home = async () => {
   const barberShops: BarberShop[] = await fetch(
@@ -21,18 +27,17 @@ const Home = async () => {
     .then((res) => res.json())
     .catch(() => [])
 
-
-    // TODO: Adicionar lógica de barbearias mais populares no DB
-    const popularBarbers: BarberShop[] = await fetch(
+  // TODO: Adicionar lógica de barbearias mais populares no DB
+  const popularBarbers: BarberShop[] = await fetch(
     "http://localhost:8080/barber-shops",
     {
       cache: "no-store",
-    },    
+    },
   )
     .then((res) => res.json())
     .catch(() => [])
 
-    popularBarbers.sort((a, b) => a.name.localeCompare(b.name))
+  popularBarbers.sort((a, b) => a.name.localeCompare(b.name))
 
   return (
     <div>
@@ -41,14 +46,32 @@ const Home = async () => {
         <h2 className="text-2xl font-bold">Olá, Guerra!</h2>
         <p>Segunda-Feira, 05 de Agosto.</p>
 
+        {/* Busca */}
         <div className="mt-6 flex items-center gap-2">
-          <Input placeholder="Faça sua busca"></Input>
+          <Input placeholder="Buscar"></Input>
           <Button>
             <SearchIcon></SearchIcon>
           </Button>
         </div>
 
-        <div className="relative mt-6 mb-3 h-37.5 w-full">
+        {/* Busca Rápida */}
+
+        <div className="hide-scrollbar mt-6 flex gap-3 overflow-x-scroll">
+          {quickSearchoption.map((option) => (
+            <Button key={option.title} className="gap-2" variant="secondary">
+              <Image
+                src={option.imageUrl}
+                width={16}
+                height={16}
+                alt={option.title}
+              />
+              {option.title}
+            </Button>
+          ))}
+        </div>
+
+        {/* Banner */}
+        <div className="relative mt-5 mb-3 h-37.5 w-full">
           <Image
             alt="Agende com os melhores da FSW"
             src="/banner-01.png"
@@ -58,32 +81,7 @@ const Home = async () => {
         </div>
 
         {/* Agendamento */}
-        <h2 className="mb-3 text-xs font-bold text-gray-400 uppercase">
-          Agendamentos
-        </h2>
-
-        <Card>
-          <CardContent className="flex justify-between p-0">
-            {/* Esquerda */}
-            <div className="flex flex-col gap-2 py-5 pl-5">
-              <Badge className="w-fit">Confirmado</Badge>
-              <h3 className="text-lg font-semibold">Corte de cabelo</h3>
-              <div className="item-center flex gap-2">
-                <Avatar className="h-6 w-6">
-                  <AvatarImage src="/logo.png" />
-                </Avatar>
-                <p className="text-sm">Barbearia FSW</p>
-              </div>
-            </div>
-
-            {/* Direita */}
-            <div className="h-100% flex flex-col items-center justify-center border-l-2 border-solid border-gray-300 px-5">
-              <p className="text-sm">Agosto</p>
-              <p className="text-2xl">05</p>
-              <p className="text-sm">20:00</p>
-            </div>
-          </CardContent>
-        </Card>
+        <BookingItem></BookingItem>
 
         {/* Barbearias */}
         <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
@@ -110,8 +108,8 @@ const Home = async () => {
 
       <footer>
         <Card>
-          <CardContent className='py-2 px-3'>
-            © 2023 Copyright <span className='font-bold'>FSW Barber</span>
+          <CardContent className="px-3 py-2">
+            © 2023 Copyright <span className="font-bold">FSW Barber</span>
           </CardContent>
         </Card>
       </footer>
