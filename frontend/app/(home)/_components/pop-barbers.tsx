@@ -1,5 +1,5 @@
 // Components
-import BarberShopItem from "@/app/_components/home/barbershop-item"
+import BarberShopItem from "@/app/(home)/_components/barbershop-item"
 
 // Types
 import { BarberShop } from "@/types/barbershop"

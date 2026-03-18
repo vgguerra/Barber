@@ -1,12 +1,12 @@
 // Components
 import Header from "@/app/_components/shared/header"
 import Footer from "@/app/_components/shared/footer"
-import BookingItem from "@/app/_components/home/booking-item"
-import BarberShopSection from "@/app/_components/home/barbershop-section"
-import QuickSearch from "@/app/_components/home/quick-search"
-import Banner from "@/app/_components/home/banner"
-import Search from "@/app/_components/home/search"
-import Hello from "@/app/_components/home/hello"
+import BookingItem from "@/app/(home)/_components/booking-item"
+import BarberShopSection from "@/app/(home)/_components/barbershop-section"
+import QuickSearch from "@/app/(home)/_components/quick-search"
+import Banner from "@/app/(home)/_components/banner"
+import Search from "@/app/(home)/_components/search"
+import Hello from "@/app/(home)/_components/hello"
 
 // Types
 import { BarberShop } from "@/types/barbershop"

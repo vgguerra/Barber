@@ -1,7 +1,7 @@
-import { Card, CardContent } from "../ui/card"
+import { Card, CardContent } from "../../_components/ui/card"
 import { BarberShop } from "@/types/barbershop"
-import { Button } from "../ui/button"
-import { Badge } from "../ui/badge"
+import { Button } from "../../_components/ui/button"
+import { Badge } from "../../_components/ui/badge"
 import Image from "next/image"
 import { StarIcon } from "lucide-react"
 
@@ -11,7 +11,7 @@ interface BarberShopItemProps {
 
 const BarberShopItem = ({ barbershop }: BarberShopItemProps) => {
   return (
-    <Card className="relative max-w-[220px] min-w-[220px] overflow-hidden rounded-2xl">
+    <Card className="relative max-w-55 min-w-55 overflow-hidden rounded-2xl">
       <CardContent className="p-0">
         {/* Imagem */}
         <div className="relative h-39.75 w-full">
