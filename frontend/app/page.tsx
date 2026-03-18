@@ -1,5 +1,3 @@
-"use client"
-
 import { SearchIcon } from "lucide-react"
 import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
@@ -8,8 +6,21 @@ import { Card, CardContent } from "./_components/ui/card"
 import { Badge } from "./_components/ui/badge"
 import { Avatar, AvatarImage } from "./_components/ui/avatar"
 import Image from "next/image"
+import BarberShopItem from "@/app/_components/barbershor-item"
 
-const Home = () => {
+// Types
+import { BarberShop } from "@/types/barbershop"
+
+const Home = async () => {
+  const barberShops: BarberShop[] = await fetch(
+    "http://localhost:8080/barber-shops",
+    {
+      cache: "no-store",
+    },
+  )
+    .then((res) => res.json())
+    .catch(() => [])
+
   return (
     <div>
       <Header></Header>
@@ -32,13 +43,34 @@ const Home = () => {
             className="rounded-xl object-cover"
           ></Image>
         </div>
+        {/* <h2 className="mb-3 text-xs font-bold text-gray-400 uppercase">
+          Barbearias
+        </h2>
+
+        <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {barberShops.length === 0 ? (
+            <p className="text-sm text-gray-500">
+              Nenhuma barbearia encontrada.
+            </p>
+          ) : (
+            barberShops.map((shop: any) => (
+              <Card key={shop.id}>
+                <CardContent className="px-4 py-4">
+                  <h3 className="text-lg font-semibold">{shop.name}</h3>
+                  <p className="text-sm text-gray-500">{shop.address}</p>
+                  <p className="mt-1 text-sm">{shop.description}</p>
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </div> */}
 
         {/* Agendamento */}
-        <h2 className="text-xs font-bold text-gray-400 uppercase mb-3">
+        <h2 className="mb-3 text-xs font-bold text-gray-400 uppercase">
           Agendamentos
         </h2>
 
-        <Card >
+        <Card>
           <CardContent className="flex justify-between p-0">
             {/* Esquerda */}
             <div className="flex flex-col gap-2 py-5 pl-5">
@@ -60,6 +92,17 @@ const Home = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Barbearias */}
+        <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
+          Recomendados
+        </h2>
+
+        <div className="hide-scrollbar flex gap-4 overflow-x-auto py-2">
+          {barberShops.map((barbershop: any) => (
+            <BarberShopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
       </div>
     </div>
   )
