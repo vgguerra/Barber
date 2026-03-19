@@ -4,6 +4,7 @@ import Image from "next/image"
 import { ChevronLeftIcon, MapPinIcon, MenuIcon, StarIcon } from "lucide-react"
 import { Button } from "@/app/_components/ui/button"
 import Link from "next/link"
+import ServiceItem from "./_components/service-item"
 
 const BarberShopPage = async ({
   params,
@@ -16,7 +17,7 @@ const BarberShopPage = async ({
 
   try {
     barbershop = await getBarberByID(id)
-  } catch (error) {
+  } catch {
     notFound()
   }
 
@@ -78,7 +79,22 @@ const BarberShopPage = async ({
 
       <div className="space-y-3 border-b border-solid p-5">
         <h2 className="font-bold text-gray-400 uppercase">Sobre nós</h2>
-        <p className="text-sm text-justify">{barbershop.description}</p>
+        <p className="text-justify text-sm">{barbershop.description}</p>
+      </div>
+
+      <div className="space-y-3 p-5">
+        <h2 className="font-bold text-gray-400 uppercase">Serviços</h2>
+        {barbershop.services?.length ? (
+          <div className="grid gap-3 sm:grid-cols-2">
+            {barbershop.services.map((service) => (
+              <ServiceItem key={service.id} service={service} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-gray-500">
+            Nenhum serviço cadastrado ainda.
+          </p>
+        )}
       </div>
     </div>
   )

@@ -3,6 +3,8 @@ package com.barber.backend.barberShop.dto;
 import java.util.List;
 import java.util.UUID;
 
+import com.barber.backend.barberShopService.BarberShopServiceDTO;
+
 public class BarberShopDTO {
 
     private UUID id;
@@ -11,16 +13,18 @@ public class BarberShopDTO {
     private List<String> phones;
     private String description;
     private String imageUrl;
+    private List<BarberShopServiceDTO> services;
 
     public BarberShopDTO() {}
 
-    public BarberShopDTO(UUID id, String name, String address, List<String> phones, String description, String imageUrl) {
+    public BarberShopDTO(UUID id, String name, String address, List<String> phones, String description, String imageUrl, List<BarberShopServiceDTO> services) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phones = phones;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.services = services;
     }
 
     public UUID getId() { return id; }
@@ -40,4 +44,7 @@ public class BarberShopDTO {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public List<BarberShopServiceDTO> getServices() { return services; }
+    public void setServices(List<BarberShopServiceDTO> services) { this.services = services; }
 }

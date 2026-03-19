@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.barber.backend.barberShop.dto.BarberShopDTO;
+import com.barber.backend.barberShopService.BarberShopServiceDTO;
 
 @RestController
 @RequestMapping("/barber-shops")
@@ -36,6 +37,14 @@ public class BarberShopController {
     public BarberShopDTO getById(@PathVariable("id") UUID id) {
         return service.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Barber shop not found"));
+    }
+
+    @GetMapping("/{id}/services")
+    public List<BarberShopServiceDTO> getServices(@PathVariable("id") UUID id) {
+        if (!service.findById(id).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Barber shop not found");
+        }
+        return service.findServicesByBarberShopId(id);
     }
 
 }

@@ -6,14 +6,19 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.barber.backend.barberShop.dto.BarberShopDTO;
+import com.barber.backend.barberShopService.BarberShopServiceDTO;
+import com.barber.backend.barberShopService.BarberShopServiceRepository;
+import com.barber.backend.barberShopService.BarberShopServiceEntity;
 
 @Service
 public class BarberShopService {
 
     private final BarberShopRepository repository;
+    private final BarberShopServiceRepository serviceRepository;
 
-    public BarberShopService(BarberShopRepository repository) {
+    public BarberShopService(BarberShopRepository repository, BarberShopServiceRepository serviceRepository) {
         this.repository = repository;
+        this.serviceRepository = serviceRepository;
     }
 
     public List<BarberShopDTO> findAll() {
@@ -28,13 +33,33 @@ public class BarberShopService {
         return repository.findById(id).map(this::toDTO);
     }
 
+    public List<BarberShopServiceDTO> findServicesByBarberShopId(java.util.UUID barberShopId) {
+        return serviceRepository.findByBarberShopId(barberShopId).stream().map(this::toServiceDTO).collect(Collectors.toList());
+    }
+
     private BarberShopDTO toDTO(BarberShopEntity entity) {
+        List<BarberShopServiceDTO> services = serviceRepository
+            .findByBarberShopId(entity.getId())
+            .stream()
+            .map(this::toServiceDTO)
+            .collect(Collectors.toList());
+
         return new BarberShopDTO(
                 entity.getId(),
                 entity.getName(),
                 entity.getAddress(),
                 entity.getPhones(),
                 entity.getDescription(),
-                entity.getImageUrl());
+                entity.getImageUrl(),
+                services);
+    }
+
+    private BarberShopServiceDTO toServiceDTO(BarberShopServiceEntity entity) {
+        return new BarberShopServiceDTO(
+                entity.getId(),
+                entity.getName(),
+                entity.getDescription(),
+                entity.getImageUrl(),
+                entity.getPrice());
     }
 }
