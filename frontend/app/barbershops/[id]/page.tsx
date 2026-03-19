@@ -5,6 +5,7 @@ import { ChevronLeftIcon, MapPinIcon, MenuIcon, StarIcon } from "lucide-react"
 import { Button } from "@/app/_components/ui/button"
 import Link from "next/link"
 import ServiceItem from "./_components/service-item"
+import ContactItem from "./_components/contact-item"
 
 const BarberShopPage = async ({
   params,
@@ -82,6 +83,7 @@ const BarberShopPage = async ({
         <p className="text-justify text-sm">{barbershop.description}</p>
       </div>
 
+      {/* Serviços da barbearia */}
       <div className="space-y-3 p-5">
         <h2 className="font-bold text-gray-400 uppercase">Serviços</h2>
         {barbershop.services?.length ? (
@@ -95,6 +97,14 @@ const BarberShopPage = async ({
             Nenhum serviço cadastrado ainda.
           </p>
         )}
+      </div>
+
+      {/* Contato */}
+
+      <div className="space-y-3 p-5">
+        {barbershop.phones.map((phone) => (
+          <ContactItem key={phone} phone={phone} />
+        ))}
       </div>
     </div>
   )

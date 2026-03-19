@@ -1,5 +1,7 @@
 import Image from "next/image"
 import { BarberShopService } from "@/types/barbershop"
+import { Button } from "@/app/_components/ui/button"
+import { Card, CardContent } from "@/app/_components/ui/card"
 
 interface ServiceItemProps {
   service: BarberShopService
@@ -7,9 +9,10 @@ interface ServiceItemProps {
 
 export default function ServiceItem({ service }: ServiceItemProps) {
   return (
-    <div className="rounded-xl border border-slate-200 p-4 shadow-sm transition hover:shadow-lg">
-      <div className="flex items-start gap-3">
-        <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-100">
+    <Card>
+      <CardContent className="flex items-center gap-3">
+        {/* Imagem do serviço */}
+        <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden rounded-lg">
           <Image
             src={service.imageUrl}
             alt={service.name}
@@ -17,21 +20,24 @@ export default function ServiceItem({ service }: ServiceItemProps) {
             className="object-cover"
           />
         </div>
-        <div className="flex-1">
-          <h3 className="text-sm font-semibold text-gray-300">
-            {service.name}
-          </h3>
-          <p className="mt-1 text-xs text-gray-500">{service.description}</p>
+        {/* Informações do serviço */}
+        <div className="flex-1 space-y-2">
+          <h3 className="text-s font-semibold text-gray-300">{service.name}</h3>
+          <p className="text-sm text-gray-400">{service.description}</p>
+          {/* Botão + preço abaixo */}
+          <div className="flex items-center justify-between pt-2">
+            <Button variant="secondary" size="sm">
+              Reservar
+            </Button>
+            <p className="text-primary text-sm font-bold">
+              {Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(Number(service.price))}
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="mt-3 flex items-center justify-between">
-        <span className="text-base font-bold">
-          R$ {service.price.toFixed(2)}
-        </span>
-        <button className="bg-primary hover:bg-primary-dark rounded-lg px-3 py-1 text-xs font-semibold text-white">
-          Agendar
-        </button>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }

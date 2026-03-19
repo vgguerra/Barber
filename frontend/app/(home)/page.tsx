@@ -11,9 +11,6 @@ const Home = async () => {
 
       {/* Conteúdo principal */}
       <HomePage/>
-
-      {/* Rodapé */}
-      <Footer/>
     </div>
   )
 }
