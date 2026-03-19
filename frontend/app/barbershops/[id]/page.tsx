@@ -61,12 +61,12 @@ const BarberShopPage = async ({
       <div className="border-b border-solid p-5">
         <h1 className="mb-3 text-xl font-bold">{barbershop.name}</h1>
 
-        <div className="item-center mt-2 mb-2 flex">
+        <div className="item-center mt-2 mb-2 flex gap-2">
           <MapPinIcon className="text-primary" />
           <p className="text-s text-gray-400">{barbershop.address}</p>
         </div>
 
-        <div className="item-center mt-2 flex">
+        <div className="item-center mt-2 flex gap-2">
           <StarIcon className="text-primary fill-primary" />
 
           {/* TODO: Substituir por avaliações reais (Precisa implementar feature de realizar a avaliação) */}
