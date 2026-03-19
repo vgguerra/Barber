@@ -24,6 +24,10 @@ public class BarberShopService {
         return repository.findByNameContainingIgnoreCase(term).stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    public java.util.Optional<BarberShopDTO> findById(java.util.UUID id) {
+        return repository.findById(id).map(this::toDTO);
+    }
+
     private BarberShopDTO toDTO(BarberShopEntity entity) {
         return new BarberShopDTO(
                 entity.getId(),
